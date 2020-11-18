@@ -413,12 +413,12 @@ resource "aws_instance" "RedisDB_2" {
 
 # Create EC2 instance2
 resource "aws_instance" "Grafana" {
-  ami                    = "ami-0947d2ba12ee1ff75"
+  ami                    = data.aws_ami.Private_Template.id
   instance_type          = "t2.micro"
   subnet_id              = aws_subnet.Grafana.id
   key_name               = "crossovertest"
   vpc_security_group_ids = [aws_security_group.Grafana.id]
-  user_data              = file("start.sh")
+  user_data              = file("jenkins.sh")
   tags = {
     Name        = "Grafana Node"
     name        = "Grafana Node"
